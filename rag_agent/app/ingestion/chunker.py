@@ -5,7 +5,7 @@ def split_documents(documents):
     
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=500,
-        chunk_overlap=600
+        chunk_overlap=400
     )
 
     return splitter.split_documents(documents)
