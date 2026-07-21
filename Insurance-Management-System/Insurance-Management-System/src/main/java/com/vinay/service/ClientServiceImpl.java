@@ -46,7 +46,10 @@ public class ClientServiceImpl implements ClientService {
 
 	@Override
 	public ClientDto findByEmail(String email) {
-		String normalizedEmail = email.trim().toLowerCase();
+        if (email == null) {
+            throw new IllegalArgumentException("Email cannot be null");
+        }
+        String normalizedEmail = email.trim().toLowerCase();
 		Client client = clientRepository.findByEmail(normalizedEmail)
 				.orElseThrow(() -> new ResourceNotFoundException("Client", "client email", email));
 		return modelMapper.map(client, ClientDto.class);
