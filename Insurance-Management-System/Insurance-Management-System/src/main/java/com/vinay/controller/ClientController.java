@@ -27,7 +27,9 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/api/clients/")
 public class ClientController {
-	
+        if (email == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 	@Autowired
 	private ClientService clientService;
 	
