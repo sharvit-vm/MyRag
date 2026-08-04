@@ -33,7 +33,9 @@ public class ClientController {
 	
 //	@PostMapping("/")
 //	public ResponseEntity<ClientDto> createClient(@Valid @RequestBody ClientDto client){
-//	return new ResponseEntity<ClientDto>(clientService.addClient(client),HttpStatus.CREATED);
+        if (email == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
 //	}
 	
 	@PutMapping("/{id}")
