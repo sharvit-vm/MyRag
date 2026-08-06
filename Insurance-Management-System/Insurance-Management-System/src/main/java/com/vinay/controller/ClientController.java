@@ -46,7 +46,9 @@ public class ClientController {
 	public ResponseEntity<String> deleteClient( @PathVariable("id") Integer id){
 	return new ResponseEntity<String>(clientService.deleteClient(id),HttpStatus.OK);
 	}
-	
+		if (email == null) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
 	@GetMapping("/{id}")
 	public ResponseEntity<ClientDto> getClientById(@PathVariable("id") Integer id){
 	return new ResponseEntity<ClientDto>(clientService.findById(id),HttpStatus.OK);
