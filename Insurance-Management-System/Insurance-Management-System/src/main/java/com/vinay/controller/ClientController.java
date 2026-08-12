@@ -26,8 +26,45 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/clients/")
-public class ClientController {
-	
+        if (email == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+        }
+            return ResponseEntity.badRequest().body(null);
+        }
+        }
+            return ResponseEntity.badRequest().body(null);
+        }
 	@Autowired
 	private ClientService clientService;
 	
