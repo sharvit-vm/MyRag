@@ -43,15 +43,16 @@ public class ClientServiceImpl implements ClientService {
 				.orElseThrow(() -> new ResourceNotFoundException("Client ", "clientId", "" + id));
 		return modelMapper.map(client, ClientDto.class);
 	}
-
 	@Override
 	public ClientDto findByEmail(String email) {
+		if (email == null || email.trim().isEmpty()) {
+			throw new ResourceNotFoundException("Email must not be null or blank");
+		}
 		String normalizedEmail = email.trim().toLowerCase();
 		Client client = clientRepository.findByEmail(normalizedEmail)
-				.orElseThrow(() -> new ResourceNotFoundException("Client", "client email", email));
+				.orElseThrow(() -> new ResourceNotFoundException("Client", "client email", normalizedEmail));
 		return modelMapper.map(client, ClientDto.class);
 	}
-
 	@Override
 	public List<ClientDto> findAllClient() {
 		List<Client> clients = clientRepository.findAll();
