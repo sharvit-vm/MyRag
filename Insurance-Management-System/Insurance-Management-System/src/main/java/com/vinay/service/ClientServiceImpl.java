@@ -46,6 +46,8 @@ public class ClientServiceImpl implements ClientService {
 
 	@Override
 	public ClientDto findByEmail(String email) {
+		if (email == null || email.isBlank())
+			throw new ResourceNotFoundException("email must be provided");
 		String normalizedEmail = email.trim().toLowerCase();
 		Client client = clientRepository.findByEmail(normalizedEmail)
 				.orElseThrow(() -> new ResourceNotFoundException("Client", "client email", email));
