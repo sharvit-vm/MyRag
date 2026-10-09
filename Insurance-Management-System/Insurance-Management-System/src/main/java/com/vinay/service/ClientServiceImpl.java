@@ -46,20 +46,13 @@ public class ClientServiceImpl implements ClientService {
 
 	@Override
 	public ClientDto findByEmail(String email) {
+		if (email == null || email.trim().isEmpty())
+			throw new IllegalArgumentException("email must not be null or empty");
 		String normalizedEmail = email.trim().toLowerCase();
 		Client client = clientRepository.findByEmail(normalizedEmail)
 				.orElseThrow(() -> new ResourceNotFoundException("Client", "client email", email));
 		return modelMapper.map(client, ClientDto.class);
 	}
-
-	@Override
-	public List<ClientDto> findAllClient() {
-		List<Client> clients = clientRepository.findAll();
-		List<ClientDto> clientsDto = clients.stream().map(client -> modelMapper.map(client, ClientDto.class))
-				.collect(Collectors.toList());
-		return clientsDto;
-	}
-
 	@Override
 	public ClientDto updateClientInfo(ClientDto client, Integer clientId) {
 		if (client.getEmail() != null)
