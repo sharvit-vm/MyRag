@@ -45,14 +45,15 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
+	@Override
 	public ClientDto findByEmail(String email) {
+		if (email == null || email.trim().isEmpty())
+			throw new IllegalArgumentException("email must be provided");
 		String normalizedEmail = email.trim().toLowerCase();
 		Client client = clientRepository.findByEmail(normalizedEmail)
 				.orElseThrow(() -> new ResourceNotFoundException("Client", "client email", email));
 		return modelMapper.map(client, ClientDto.class);
 	}
-
-	@Override
 	public List<ClientDto> findAllClient() {
 		List<Client> clients = clientRepository.findAll();
 		List<ClientDto> clientsDto = clients.stream().map(client -> modelMapper.map(client, ClientDto.class))
